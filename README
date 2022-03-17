@@ -1,0 +1,113 @@
+
+Fisierele stiva/stiva_f.h, coada/coada_f.h, pagina_web.h, tab.h, browser.h
+contin definitiile functiilor din fisierele .c, si comentarii cu privire
+la acestea.
+
+FISIER: tema2.c
+	In acest fisier se gaseste main-ul, care primeste ca argumente fisierul
+de intrare si pe cel de iesire. In main se deschid cele doua fisiere. Fisierul
+de intrare este citit linie cu linie. Fiecare linie este impartita in cuvinte
+folosind "strtok", apelandu-se functiile corespunzatoare, in functie de comanda
+primita.
+
+FISIER: stiva/stiva_f.c
+	Contine implementarea functiilor de baza pentru stiva.
+
+FISIER: coada/coada_f.c
+	Contine implementarea functiilor de baza pentru coada.
+
+FISIER: pagina_web.c
+-InitPage
+	Initializeaza un element de tip TWeb_page, folosindu-se de functia
+"get_page_resources".
+
+FISIER: tab.c
+-InitTab
+	Initializeaza un element de tip TTab. Se returneaza : NULL - eroare de
+alocare, un pointer la un element de tip TTab - succes.
+
+-Back
+	Scoate o pagina web din stiva de back, aceasta devenind pagina curenta.
+Returneaza -2 - nu exista elemente in stiva de back, 1 - succes.
+
+-Forward
+	Scoate o pagina web din stiva de forward, aceasta devening pagina
+curenta. Returneaza: -2 - nu exista elemente in stiva de forward, 1 - succes.
+
+-AfiseazaResurse
+	Afiseaza resursele paginii curente. Returneaza: -2 - nu exista o pagina
+deschisa in tab, 1- succes.
+
+FISIER: browser.c
+-InitBrowser
+	Initializare element te tip TBrowser, initializand lista de taburi,
+coada de istoric, de prioritati, de descarcari finalizate.
+Returneaza: NULL - esec, pointer catre un element de tip TBrowser - succes.
+
+-AddTab
+	Adauga un nou tab in browser. Returneaza: -1 - eroare de alocare,
+1 - succes.
+
+-DelTab
+	Sterge ultimul tab deschis.
+
+-ChangeTab
+	Schimba tabul curent cu o referinta la tabul de la indexul
+primit ca parametru.
+
+-print_open_tabs
+	Afiseaza informatii despre taburile unui browser. Se afiseaza
+indexul tabului, si url-ul paginii curente (sau empty).
+
+-DeschidePagina
+	Initializeaza o noua pagina cu url-ul primit ca parametru, pe care o
+deschide in tabul curent. In cazul in care exista o pagina deja deschisa in
+tab, este introdusa in stiva de back. Se goleste stiva de forward.
+
+-AfisareIstoric
+	Afiseaza istoricul browserului. Returneaza: -1 - eroare de alocare,
+1 - succes, -2 - in cazul in care la incercarea de a concatena 2 cozi,
+sursa este vida.
+
+-Sterge_Istoric
+	Sterge un numar de "intrari" din istoricul browserului.
+Returneaza: -1 - eroare de alocare, 1 - succes.
+
+-DownloadResurse
+	Preia resursa cu index-ul primit ca parametru, adaugand-o in coada
+prioritatilor.
+	Daca coada de prioritati este goala, atunci resursa este introdusa
+direct. In caz contrar, se extrage cate o resursa, iar in momentul in care
+dimensiunea ramasa de descarcat pentru resursa pe care dorim sa o introducem
+in coada este mai mica sau egala decat cea a resursei extrasa, se introduce
+in coada auxiliara, resursa, apoi resursa extrasa. Daca resursa pe care dorim
+sa o introducem are prioritate mai mica fata de elementele deja existente,
+aceasta este introdusa direct in coada auxiliara. Se reface apoi coada de
+prioritati. 
+Returneaza: -1 - eroare de alocare, 1 - succes, -2 - in tabul curent nu e
+deschisa nicio pagina.
+
+-Downloads
+	Afiseaza istoricul descarcarilor din browser. Mai intai se afiseaza
+resursele din coada de prioritati, apoi resursele din coada descarcarilor
+finalizate.
+Returneaza: -1 - eroare de alocare, 1 - succes.
+
+-SetBand
+	Setare bandwidth.
+
+-Wait
+	Comanda care permite avansarea descarcarilor. In functie de numarul
+de bytes oferit, si dimensiunea ramasa de descarcat pentru o resursa, se decide
+daca se descarca doar o parte din resursa, intreaga resursa sau se descarca
+intreaga resursa, avansandu-se la urmatoarea. Odata descarcata resursa, este
+introdusa in coada de descarcari finalizate. Se reconstruieste coada de
+prioritati, avand doar resursele in curs de descarcare.
+Returneaza: -1 - eroare de alocare, 1 - succes.
+
+
+Punctaj primit:
+	Total: [85/85]
+	Bonus: [00/20]
+
+
